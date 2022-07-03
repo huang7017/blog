@@ -1,0 +1,53 @@
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('member_history', {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      primaryKey: true
+    },
+    memberid: {
+      type: DataTypes.BIGINT,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING(128),
+      allowNull: false
+    },
+    salt: {
+      type: DataTypes.STRING(32),
+      allowNull: false
+    },
+    createid: {
+      type: DataTypes.BIGINT,
+      allowNull: false
+    },
+    createtime: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    modifyid: {
+      type: DataTypes.BIGINT,
+      allowNull: false
+    },
+    modifytime: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  }, {
+    sequelize,
+    tableName: 'member_history',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "member_history_pkey",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
+  });
+};
