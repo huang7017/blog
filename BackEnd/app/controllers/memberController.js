@@ -47,3 +47,27 @@ exports.selectInsertByEmail = async(req,res) => {
     }
 
 }
+
+
+exports.login = async (req,res) => {
+    var email = req.body.Email == null ? null : req.body.Email;
+    var password = req.body.Password == null ? null : req.body.Password;
+
+    if (!email || !password) {
+        res.status(400).send({
+          message: "Content can not be empty!"
+        });
+        return;
+    }  
+    
+    try {
+        obj = {
+            Email:email,
+            Password:password
+        }
+        var member = await memberHistoryService.query(obj);
+        return res.status(200).json({ status: 200, data: member, message: "Succesfully Query" });
+    } catch (e) {
+        return res.status(400).json({ status: 400, message: e.message });
+    }
+}
