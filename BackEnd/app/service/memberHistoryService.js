@@ -14,6 +14,7 @@ exports.insert  = async function(obj){
         memberid:memberId,
         password:passwordData.hash.toString(),
         salt:passwordData.salt.toString(),
+        isenable:false,
         createid : 0,
         createtime : date,
         modifyid : 0,
@@ -54,13 +55,12 @@ exports.query  = async function(obj){
 
 function hashPassword(password) {
     var salt = CryptoJS.lib.WordArray.random(128 / 8);
-    console.log(salt);
+    
     var hash = CryptoJS.PBKDF2(password
     ,salt,{
-        keySize: 128 / 32,
-        iterations: 10
+        keySize: 128 / 32
     });
-
+    console.log(hash);
     return {
         salt: salt,
         hash: hash
@@ -73,10 +73,9 @@ function isPasswordCorrect(savedHash, savedSalt, passwordAttempt) {
     console.log(passwordAttempt);
     var hash = CryptoJS.PBKDF2(passwordAttempt
         ,savedSalt,{
-            keySize: 128 / 32,
-            iterations: 10
+            keySize: 128 / 32
     });
 
-    console.log(hash);
-    return savedHash == hash;
+    console.log(hash.toString());
+    return savedHash.toString() == hash.toString();
 }

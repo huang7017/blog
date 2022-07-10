@@ -11,6 +11,7 @@ exports.insert  = async function(req){
     const member = {
         name : name,
         email : email,
+        status:0,
         createid : 0,
         createtime : date,
         modifyid : 0,
@@ -36,6 +37,7 @@ exports.selectInsertByEmail = async function(req){
     const member = {
         name : name,
         email : email,
+        status:0,
         createid : 0,
         createtime : date,
         modifyid : 0,
