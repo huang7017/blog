@@ -4,6 +4,8 @@
     "crypto-js": "^4.1.1",
     "express": "^4.18.1",
     "moment": "^2.29.3",
+    "nodemailer": "^6.7.7",
+    "nodemailer-smtp-transport": "^2.7.4",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "pg-search-sequelize": "^0.0.10",
