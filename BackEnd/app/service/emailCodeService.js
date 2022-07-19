@@ -1,5 +1,6 @@
 const db = require("../models");
 const EmailCode = db.emailCode;
+const op = db.op;
 const moment = require('moment');
 
 exports.selectInsertByEmail = async function(obj){
@@ -28,4 +29,28 @@ exports.selectInsertByEmail = async function(obj){
     catch(e){
         throw Error(e.message || "Some error occurred while creating the Memeber.") ;
     }
+}
+
+
+exports.query = async function(obj){
+    var email = obj.Email == null? null : obj.Email;
+    var code = obj.Code == null? null : obj.Code;
+    try{
+        const data = await EmailCode.findAll({
+            where: {
+              email: {
+                [op.eq]: email
+              },
+              code: {
+                [op.eq]: code
+              }
+            }
+          });
+
+        return {data};
+    }
+    catch(e){
+        throw Error(e.message || "Some error occurred while creating the Memeber.") ;
+    }
+
 }

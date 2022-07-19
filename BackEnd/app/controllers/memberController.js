@@ -75,6 +75,30 @@ exports.selectInsertByEmail = async(req,res) => {
 
 }
 
+exports.code = async (req,res) => {
+    var email = req.body.Email == null ? null : req.body.Email;
+    var code = req.body.Code == null? null : req.body.Code;
+
+    if (!email || !code) {
+        res.status(400).send({
+          message: "Content can not be empty!"
+        });
+        return;
+    }
+
+    try {
+        obj = {
+            Email:email,
+            Code:code
+        }
+        var code = await emailCodeService.query(obj);
+        return res.status(200).json({ status: 200, data: code.data, message: "Succesfully Query" });
+    } catch (e) {
+        return res.status(400).json({ status: 400, message: e.message });
+    }
+
+}
+
 
 exports.login = async (req,res) => {
     var email = req.body.Email == null ? null : req.body.Email;
