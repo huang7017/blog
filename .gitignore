@@ -1,4 +1,7 @@
 .DS_Store
+BackEnd/app/config/DbConfig.js
+BackEnd/app/config/EmailConfig.js
 BackEnd/.DS_Store
 node_modules/
+
 
