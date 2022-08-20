@@ -4,10 +4,10 @@ const moment = require('moment');
 
 //註冊帳號
 exports.selectInsertByEmail = async function(req){
-    var name = req.body.Name == null ? null : req.body.Name;
-    var email = req.body.Email == null ? null : req.body.Email;
-    var password = req.body.Password == null ? null : req.body.Password;
-    var date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
+    let name = req.body.Name == null ? null : req.body.Name;
+    let email = req.body.Email == null ? null : req.body.Email;
+    let password = req.body.Password == null ? null : req.body.Password;
+    let date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
 
     const member = {
         name : name,
@@ -34,15 +34,15 @@ exports.selectInsertByEmail = async function(req){
 
 //更改是否啟用狀態
 exports.update = async function(obj){
-    var email = obj.Email == null ? null : obj.Email;
-    var status = obj.Status == null? null : obj.Status;
+    let email = obj.Email == null ? null : obj.Email;
+    let status = obj.Status == null? null : obj.Status;
 
     const member = {
         status: status
     }
 
     try{
-        var data = await Member.update(
+        let data = await Member.update(
             member,
             { where: { email: email } }
         );
@@ -55,9 +55,9 @@ exports.update = async function(obj){
 
 //email查詢資料
 exports.findByOne = async function(obj){
-    var email = obj.Email == null ? null : obj.Email;
+    let email = obj.Email == null ? null : obj.Email;
     try{
-        var data = await Member.findOne({
+        let data = await Member.findOne({
             where: {
                 email: email
             }
@@ -71,8 +71,8 @@ exports.findByOne = async function(obj){
 //上傳頭貼
 
 exports.imageUpload =  async function(obj){
-    var memberId = obj.MemberId == null ? null : obj.MemberId;
-    var file = obj.File == null? null : obj.File;
+    let memberId = obj.MemberId == null ? null : obj.MemberId;
+    let file = obj.File == null? null : obj.File;
 
     const member = {
         id:memberId,
@@ -80,7 +80,7 @@ exports.imageUpload =  async function(obj){
     }
 
     try{
-        var data = await Member.update(
+        let data = await Member.update(
             member,
             { where: { email: email } }
         );

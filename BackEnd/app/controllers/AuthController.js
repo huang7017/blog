@@ -7,9 +7,9 @@ const config = require('../config/JwtConfig');
 
 
 exports.selectInsertByEmail = async(req,res) => {
-    var name = req.body.Name == null ? null : req.body.Name;
-    var email = req.body.Email == null ? null : req.body.Email;
-    var password = req.body.Password == null ? null : req.body.Password;
+    let name = req.body.Name == null ? null : req.body.Name;
+    let email = req.body.Email == null ? null : req.body.Email;
+    let password = req.body.Password == null ? null : req.body.Password;
 
     if (!name|| !email || !password) {
         res.status(400).json({
@@ -19,13 +19,13 @@ exports.selectInsertByEmail = async(req,res) => {
     }
 
     try {
-        var data = await memberService.selectInsertByEmail(req);
+        let data = await memberService.selectInsertByEmail(req);
         if(data.Created){
             obj = {
                 MemberId:data.Data.id,
                 Password:password,
             }
-            var memberId = data.Data.id;
+            let memberId = data.Data.id;
             memberHistoryService.insert(obj);
 
             const randomFns=()=> { // 生成6位随机数
@@ -61,9 +61,9 @@ exports.selectInsertByEmail = async(req,res) => {
 
 
 exports.code = async (req,res) => {
-    var email = req.body.Email == null ? null : req.body.Email;
-    var code = req.body.Code == null? null : req.body.Code;
-    var status = req.body.Status == null? null : req.body.Status;
+    let email = req.body.Email == null ? null : req.body.Email;
+    let code = req.body.Code == null? null : req.body.Code;
+    let status = req.body.Status == null? null : req.body.Status;
     if (!email || !code) {
         res.status(400).json({
           message: "Content can not be empty!"
@@ -77,10 +77,10 @@ exports.code = async (req,res) => {
             Code:code,
             Status:status
         }
-        var code = await emailCodeService.query(obj);
+        let code = await emailCodeService.query(obj);
         if(code.data != null){
             memberService.update(obj);
-            var member =  await memberService.findByOne(obj);
+            let member =  await memberService.findByOne(obj);
             obj.MemberId = member.dataValues.id;
             obj.IsEnable = true;
             memberHistoryService.update(obj);
@@ -94,8 +94,8 @@ exports.code = async (req,res) => {
 }
 
 exports.login = async (req,res) => {
-    var email = req.body.Email == null ? null : req.body.Email;
-    var code = req.body.Code == null ? null : req.body.Code;
+    let email = req.body.Email == null ? null : req.body.Email;
+    let code = req.body.Code == null ? null : req.body.Code;
 
     if (!email || !code) {
         res.status(400).json({
@@ -109,7 +109,7 @@ exports.login = async (req,res) => {
             Email:email,
             Password:code
         }
-        var memberId = await memberHistoryService.query(obj);
+        let memberId = await memberHistoryService.query(obj);
         if(memberId == false){
              return res.status(403).json({ message: "帳號或密碼輸入錯誤" });;
         }

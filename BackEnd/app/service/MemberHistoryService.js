@@ -6,11 +6,11 @@ const webCrypto = require('../helpers/WebCrypto');
 
 exports.insert  = async function(obj){
     console.log(obj.MemberId)
-    var memberId = obj.MemberId == null ? null : obj.MemberId;
-    var password = obj.Password == null ? null : obj.Password;
-    var date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
+    let memberId = obj.MemberId == null ? null : obj.MemberId;
+    let password = obj.Password == null ? null : obj.Password;
+    let date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
 
-    var salt = webCrypto.generateUUID(); 
+    let salt = webCrypto.generateUUID(); 
 
     const member = {
         memberid:memberId,
@@ -26,7 +26,7 @@ exports.insert  = async function(obj){
 
   
     try{
-        var data = await MemberHistory.create(member);
+        let data = await MemberHistory.create(member);
         return data;
     }
     catch(e){
@@ -35,8 +35,8 @@ exports.insert  = async function(obj){
 }
 
 exports.query  = async function(obj){
-    var email = obj.Email == null ? null : obj.Email;
-    var password = obj.Password == null ? null : obj.Password;
+    let email = obj.Email == null ? null : obj.Email;
+    let password = obj.Password == null ? null : obj.Password;
     try{
         const [results, metadata] = await db.sequelize.query(
             "select mb.Id,mb.email,mb_h.password,mb_h.salt from member mb "+
@@ -60,15 +60,15 @@ exports.query  = async function(obj){
 }
 
 exports.update = async function(obj){
-    var memberid = obj.MemberId == null ? null : obj.MemberId;
-    var isenable = obj.IsEnable == null? null : obj.IsEnable;
+    let memberid = obj.MemberId == null ? null : obj.MemberId;
+    let isenable = obj.IsEnable == null? null : obj.IsEnable;
 
     const memberHistory = {
         isenable: isenable
     }
 
     try{
-        var data = await MemberHistory.update(
+        let data = await MemberHistory.update(
             memberHistory,
             { where: { memberid: memberid } }
         );

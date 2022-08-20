@@ -5,9 +5,9 @@ const moment = require('moment');
 
 //上傳頭貼
 exports.imageUpload =  async function(obj){
-    var memberId = obj.MemberId == null ? null : obj.MemberId;
-    var file = obj.File == null? null : obj.File;
-    var date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
+    let memberId = obj.MemberId == null ? null : obj.MemberId;
+    let file = obj.File == null? null : obj.File;
+    let date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
     const memberImage = {
         member_id:memberId,
         type: file.mimetype,
@@ -20,7 +20,7 @@ exports.imageUpload =  async function(obj){
     }
 
     try{
-        var data = await MemberImage.findOrCreate({
+        let data = await MemberImage.findOrCreate({
             where: { member_id: memberId },
             defaults: memberImage});
         return data;

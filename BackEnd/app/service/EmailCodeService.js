@@ -4,10 +4,10 @@ const op = db.op;
 const moment = require('moment');
 
 exports.selectInsertByEmail = async function(obj){
-    var email = obj.Email == null ? null : obj.Email;
-    var code = obj.Code == null ? null : obj.Code;
-    var memberId = obj.MemberId == null ? null : obj.MemberId;
-    var date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
+    let email = obj.Email == null ? null : obj.Email;
+    let code = obj.Code == null ? null : obj.Code;
+    let memberId = obj.MemberId == null ? null : obj.MemberId;
+    let date = moment().tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss');
 
     const emailCode = {
         email : email,
@@ -33,8 +33,8 @@ exports.selectInsertByEmail = async function(obj){
 
 
 exports.query = async function(obj){
-    var email = obj.Email == null? null : obj.Email;
-    var code = obj.Code == null? null : obj.Code;
+    let email = obj.Email == null? null : obj.Email;
+    let code = obj.Code == null? null : obj.Code;
     try{
         const data = await EmailCode.findAll({
             where: {
