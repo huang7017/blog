@@ -110,7 +110,6 @@ exports.login = async (req,res) => {
             Password:code
         }
         var memberId = await memberHistoryService.query(obj);
-        console.log(member)
         if(memberId == false){
              return res.status(403).json({ message: "帳號或密碼輸入錯誤" });;
         }
