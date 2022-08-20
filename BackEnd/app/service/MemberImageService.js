@@ -21,7 +21,7 @@ exports.imageUpload =  async function(obj){
 
     try{
         var data = await MemberImage.findOrCreate({
-            where: { email: email },
+            where: { member_id: memberId },
             defaults: memberImage});
         return data;
     }catch(e){

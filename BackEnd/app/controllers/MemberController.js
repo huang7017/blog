@@ -16,8 +16,8 @@ exports.imageUpload = async(req,res)=>{
             MemberId:memberId,
             File:file
         }
-        const data = memberImageService.imageUpload(obj);
-        return res.status(200).json({ message: data });
+        var data =await memberImageService.imageUpload(obj);
+        return res.status(200).json({ data: data });
     } catch (e) {
         return res.status(400).json({ status: 400, message: e.message });
     }

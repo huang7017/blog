@@ -5,7 +5,7 @@ module.exports = app => {
     const upload = multer({});
     const authenticationMiddleware = require("../helpers/Middleware");
     router.use(authenticationMiddleware);
-    router.post("/image/Uploade",upload.single('File'),member.imageUpload);
+    router.post("/image/Uploade",upload.single('Image'),member.imageUpload);
     app.use("/api/member", router);
 }
 
