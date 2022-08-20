@@ -21,4 +21,5 @@ db.member = require("./Member.js")(sequelize, DataTypes);
 db.memberHistory = require("./MemberHistory.js")(sequelize, DataTypes);
 db.emailCode = require("./EmailCode")(sequelize, DataTypes);
 db.memberImage = require("./MemberImage.js")(sequelize, DataTypes);
+db.viewMemberHistory = require("./ViewMemberHistory")(sequelize, DataTypes);
 module.exports = db;

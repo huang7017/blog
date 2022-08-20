@@ -1,5 +1,6 @@
 const db = require("../models");
 const MemberHistory = db.memberHistory;
+const ViewMemberHistory = db.viewMemberHistory;
 const moment = require('moment');
 const webCrypto = require('../helpers/WebCrypto');
 
@@ -38,18 +39,19 @@ exports.query  = async function(obj){
     let email = obj.Email == null ? null : obj.Email;
     let password = obj.Password == null ? null : obj.Password;
     try{
-        const [results, metadata] = await db.sequelize.query(
-            "select mb.Id,mb.email,mb_h.password,mb_h.salt from member mb "+
-            "inner join member_history mb_h on mb_h.memberid = mb.id and mb_h.isenable = true "+
-            "where email = :search_email",
-            {
-                replacements: { search_email: email },
-            }
-        );
-        // console.log(results[0].password);
+        // const [results, metadata] = await db.sequelize.query(
+        //     "select mb.Id,mb.email,mb_h.password,mb_h.salt from member mb "+
+        //     "inner join member_history mb_h on mb_h.memberid = mb.id and mb_h.isenable = true "+
+        //     "where email = :search_email",
+        //     {
+        //         replacements: { search_email: email },
+        //     }
+        // );
+
+        let results =await ViewMemberHistory.findOne({where: { email: email }});
         if(results !== 'undefined'){
-            if(results[0].password === webCrypto.getHash(webCrypto.HashType.SHA512,password+results[0].salt)){
-                return results[0].id;
+            if(results.password === webCrypto.getHash(webCrypto.HashType.SHA512,password+results.salt)){
+                return results.id;
             }
         }
         return  false;
